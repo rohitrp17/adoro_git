@@ -20,7 +20,7 @@ import RedShift_Db_Connect
 
 def main():
 
-    ### Calculate the time to run the code - Get store time ###
+    ### Calculate the time to run the code ###
     start = timeit.default_timer()
 
     ### Connect to database ###
@@ -33,16 +33,17 @@ def main():
 
     ### Process the result and create a dictionary to store list of attr.attr_value against prod_id ###
     ### Create column_list to store all attr.attr_value and then find its unique to know all the unique attr.attr_value ###
+    ## Just for change in git
     column_list = []
     prod_dict = {}
 
-    for row in res:
-        attr_attrval = str(row[1])+"."+str(row[2])
+    for each_row in res:
+        attr_attrval = str(each_row[1])+"."+str(each_row[2])
         column_list.append(attr_attrval)
-        if row[0] in prod_dict.keys():
-            prod_dict[row[0]].append(attr_attrval)
+        if each_row[0] in prod_dict.keys():
+            prod_dict[each_row[0]].append(attr_attrval)
         else:
-            prod_dict[row[0]] = [attr_attrval]
+            prod_dict[each_row[0]] = [attr_attrval]
     column_list = list(set(column_list))
 
     ### Create 0/1 2D list for product attributes ###
